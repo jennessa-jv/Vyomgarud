@@ -1,74 +1,138 @@
-<<<<<<< HEAD
-# Getting Started with Create React App
+# Project README
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+This React project contains a set of modern, animated UI components built with Tailwind CSS and a canvas-based visual.
 
-## Available Scripts
+Core components:
+- **Highlights.jsx** — feature cards with hover effects
+- **ParallaxSection.jsx** — scrolling parallax visuals
+- **PlaneWireframe.jsx** — animated wireframe plane rendered on canvas
+- **WireframeTunnel.jsx**, **ParticlesBackground.jsx** — supporting visuals
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 Features
+- React + Tailwind CSS
+- Responsive layout and accessible markup
+- Smooth hover animations
+- Canvas animations for wireframe visuals
+- Modular components for easy reuse
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📁 Folder Structure
+```
+src/
+├── components/
+│   ├── About.jsx
+│   ├── Contact.jsx
+│   ├── DroneShowcase.jsx
+│   ├── FeatureGrid.jsx
+│   ├── FloatingHeadline.jsx
+│   ├── Hero.jsx
+│   ├── Highlights.jsx
+│   ├── Nav.jsx
+│   ├── ParallaxSection.jsx
+│   ├── ParticlesBackground.jsx
+│   ├── PlaneWireframe.jsx
+│   ├── PlaneWireframeAlt.jsx
+│   └── WireframeTunnel.jsx
+├── hooks/
+│   └── useScrollReveal.jsx
+├── App.js
+├── index.js
+├── index.css
+└── tailwind.config.js
+```
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠️ Installation
+Ensure Node.js and npm/yarn are installed:
 
-### `npm run build`
+```bash
+npm install
+# or
+yarn install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Install Tailwind (if not already):
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## ▶️ Development
+Start the dev server:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+npm run dev
+# or (CRA)
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Build for production:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm run build
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🧭 Tailwind configuration
+Place this in `tailwind.config.js` at project root. It configures the content scanning paths, extends theme colors, and adds custom fonts.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        charcoal: "#1e1e1e",
+        orange: "#ff7b00",
+      },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
+        montserrat: ["Montserrat", "sans-serif"],
+      },
+    },
+  },
+  plugins: [],
+};
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Notes:
+- Make sure you have the fonts loaded (via Google Fonts import in `index.html` or a CSS `@import`).
+- `content` paths must match where your JSX/TSX files live so Tailwind purges unused styles correctly.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🎨 `index.css`
+This file should be located at `src/index.css`. It includes Tailwind directives and several utility classes/styles used by the components.
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🎨 `tailwing.config.js`
+Includes font module exports
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## ✅ Tips & Troubleshooting
+- If `bg-charcoal` or other custom classes don't apply, ensure Tailwind is processing `index.css` and that `tailwind.config.js` `content` paths include your files.
+- To change the accent orange globally, update the `orange` color in `tailwind.config.js`.
+- If you see missing fonts, add a link to Google Fonts in `public/index.html` or import in `index.css`.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 📦 Deployment
+Build and deploy as usual for your hosting provider. Ensure `NODE_ENV=production` when building so Tailwind purges unused styles.
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-=======
-# Vyomgarud
->>>>>>> 34fd31576b4f32da0b48128f27994d4eaf02afd7
+---
+
