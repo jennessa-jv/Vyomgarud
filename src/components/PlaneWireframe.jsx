@@ -1,7 +1,7 @@
 // src/components/WireframeTunnel.jsx
 import React, { useRef, useEffect } from "react";
 
-export default function WireframeTunnel({
+export default function PlaneWireframe({
   aspect = 420 / 300,
   colorA = "#ff5a8a",
   colorB = "#b66cff",

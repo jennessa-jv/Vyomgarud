@@ -14,8 +14,8 @@ import React, { useRef, useEffect } from "react";
  */
 export default function PlaneWireframeAlt({
   aspect = 340 / 220,
-  colorA = "#ff6aa3",
-  colorB = "#a66bff",
+  colorA = "#ff0",
+  colorB = "#ffe066",
   scale = 1,
   trailCount = 6,
 }) {

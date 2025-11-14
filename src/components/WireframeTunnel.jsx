@@ -1,19 +1,10 @@
 // src/components/WireframeTunnel.jsx
 import React, { useRef, useEffect } from "react";
 
-/**
- * WireframeTunnel (responsive + neon + pulsing + parallax + vignette + scanlines)
- *
- * Props:
- *  - aspect: width/height ratio (default 420/300)
- *  - colorA/colorB: neon gradient colors
- *  - frames: number of tunnel frames
- *  - scan: object to tweak scanline effect
- */
 export default function WireframeTunnel({
   aspect = 420 / 300,
-  colorA = "#ff5a8a", // pink (refined)
-  colorB = "#b66cff", // purple (refined)
+  colorA = "#ff0333", 
+  colorB = "#b66cff", 
   frames = 20,
   scan = { lineCount: 30, speed: 0.18, alpha: 0.06 }, // small subtle scanlines
 }) {
