@@ -118,5 +118,8 @@ This file should be located at `src/index.css`. It includes Tailwind directives 
 - To change the accent orange globally, update the `orange` color in `tailwind.config.js`.
 - If you see missing fonts, add a link to Google Fonts in `public/index.html` or import in `index.css`.
 
+Happy Coding :)
+Make India Proud
+
 ---
 
