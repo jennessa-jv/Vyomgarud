@@ -3,15 +3,9 @@
 ## Overview
 This React project contains a set of modern, animated UI components built with Tailwind CSS and a canvas-based visual.
 
-Core components:
-- **Highlights.jsx** — feature cards with hover effects
-- **ParallaxSection.jsx** — scrolling parallax visuals
-- **PlaneWireframe.jsx** — animated wireframe plane rendered on canvas
-- **WireframeTunnel.jsx**, **ParticlesBackground.jsx** — supporting visuals
 
----
 
-## 🚀 Features
+## Features
 - React + Tailwind CSS
 - Responsive layout and accessible markup
 - Smooth hover animations
@@ -20,7 +14,7 @@ Core components:
 
 ---
 
-## 📁 Folder Structure
+## Folder Structure
 ```
 src/
 ├── components/
@@ -82,7 +76,7 @@ npm run build
 
 ---
 
-## 🧭 Tailwind configuration
+## Tailwind configuration
 Place this in `tailwind.config.js` at project root. It configures the content scanning paths, extends theme colors, and adds custom fonts.
 
 ```js
@@ -116,10 +110,6 @@ Notes:
 This file should be located at `src/index.css`. It includes Tailwind directives and several utility classes/styles used by the components.
 
 
-## 🎨 `tailwing.config.js`
-Includes font module exports
-
-
 
 ---
 
@@ -127,12 +117,6 @@ Includes font module exports
 - If `bg-charcoal` or other custom classes don't apply, ensure Tailwind is processing `index.css` and that `tailwind.config.js` `content` paths include your files.
 - To change the accent orange globally, update the `orange` color in `tailwind.config.js`.
 - If you see missing fonts, add a link to Google Fonts in `public/index.html` or import in `index.css`.
-
----
-
-## 📦 Deployment
-Build and deploy as usual for your hosting provider. Ensure `NODE_ENV=production` when building so Tailwind purges unused styles.
-
 
 ---
 
