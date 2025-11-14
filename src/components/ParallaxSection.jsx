@@ -1,6 +1,5 @@
 // src/components/ParallaxSection.jsx
 import React, { useRef, useEffect } from "react";
-import WireframeTunnel from "./WireframeTunnel";
 import PlaneWireframeAlt from "./PlaneWireframeAlt";
 
 export default function ParallaxSection() {
@@ -17,18 +16,16 @@ export default function ParallaxSection() {
         Math.max(0, (window.innerHeight - rect.top) / (window.innerHeight + rect.height))
       );
 
-      // t from 0..1; use to move plane overlay
       const plane = el.querySelector(".plane-overlay");
       if (plane) {
         plane.style.transform = `
           translateY(${(1 - t) * -40}px)
           translateX(${(1 - t) * 12}px)
-          scale(${0.9 + t * 0.12})
+          scale(${1 + t * 0.1})
+          rotate(-8deg)
         `;
-        plane.style.opacity = `${0.6 + t * 0.4}`;
+        plane.style.opacity = `${0.65 + t * 0.35}`;
       }
-
-      // NOTE: tunnel canvas referenced previously was unused — kept for parity
     }
 
     onScroll();
@@ -39,6 +36,8 @@ export default function ParallaxSection() {
   return (
     <section ref={wrap} className="py-28 px-6 md:px-12 lg:px-24">
       <div className="max-w-7xl mx-auto flex items-center gap-12">
+
+        {/* LEFT SIDE */}
         <div className="flex-1">
           <h2 className="text-3xl font-bold">Persistent ISR Platforms</h2>
           <p className="mt-4 text-gray-300 max-w-xl">
@@ -54,14 +53,40 @@ export default function ParallaxSection() {
           </div>
         </div>
 
+        {/* RIGHT SIDE — SMALLER, HIGHER, TILTED, MOVED LEFT */}
         <div className="w-full max-w-[560px] relative">
-          {/* main tunnel */}
-          <WireframeTunnel aspect={420 / 300} />
 
-          {/* overlay: alt plane wireframe */}
-        <div className="plane-overlay absolute top-[-60px] right-[-16px] w-[340px] h-[230px] pointer-events-none">
-  <PlaneWireframeAlt aspect={900 / 930} colorA="#ff6aa3" colorB="#a66bff" scale={1} />
-</div>
+          <div
+            className="plane-overlay absolute pointer-events-none"
+            style={{
+              top: "-200px",       // higher
+              right: "40px",       // moved LEFT
+              width: "420px",      // smaller
+              height: "280px",
+              transform: "rotate(-8deg)",
+              opacity: 0.85
+            }}
+          >
+            <div className="relative w-full h-full">
+
+        
+              <div
+                className="absolute inset-0 blur-[35px] animate-pulse-plane"
+                style={{
+                  background:
+                    "radial-gradient(circle at 40% 60%, rgba(255,120,200,0.28), transparent 70%)",
+                }}
+              ></div>
+
+              {/* Jet wireframe */}
+              <PlaneWireframeAlt
+                aspect={900 / 930}
+                colorA="#ff6aa3"
+                colorB="#a66bff"
+                scale={1.15}  
+              />
+            </div>
+          </div>
 
         </div>
       </div>

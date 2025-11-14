@@ -83,3 +83,12 @@ body {
 .reveal-card { will-change: transform, opacity; }
 .reveal-card.revealed { transform: translateY(0); opacity: 1; }
 
+@keyframes pulse-plane {
+  0% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.08); }
+  100% { opacity: 0.35; transform: scale(1); }
+}
+
+.animate-pulse-plane {
+  animation: pulse-plane 3.8s ease-in-out infinite;
+}

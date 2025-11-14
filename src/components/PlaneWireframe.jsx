@@ -1,114 +1,105 @@
-// src/components/WireframeTunnel.jsx
-import React, { useRef, useEffect } from "react";
+// src/components/PlaneWireframe.jsx
+import React from "react";
 
 export default function PlaneWireframe({
-  aspect = 420 / 300,
-  colorA = "#ff5a8a",
-  colorB = "#b66cff",
-  frames = 20,
+  colorA = "#ffb400",
+  colorB = "#00ff99",
 }) {
-  const wrapperRef = useRef(null);
-  const canvasRef = useRef(null);
-  const rafRef = useRef(null);
-  const mouseRef = useRef({ x: 0.5, y: 0.5 });
-
-  useEffect(() => {
-    const wrapper = wrapperRef.current;
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d", { alpha: true });
-    const DPR = window.devicePixelRatio || 1;
-
-    let W, H;
-
-    const resize = () => {
-      const rect = wrapper.getBoundingClientRect();
-      W = rect.width;
-      H = rect.width / aspect;
-
-      canvas.width = W * DPR;
-      canvas.height = H * DPR;
-      canvas.style.width = `${W}px`;
-      canvas.style.height = `${H}px`;
-
-      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    };
-
-    const lerp = (a, b, t) => a + (b - a) * t;
-
-    const animate = (t) => {
-      ctx.clearRect(0, 0, W, H);
-
-      const grad = ctx.createLinearGradient(0, 0, W, H);
-      grad.addColorStop(0, colorA);
-      grad.addColorStop(1, colorB);
-
-      const pad = W * 0.05;
-      const near = { x0: pad, y0: pad, x1: W - pad, y1: H - pad };
-
-      const px = mouseRef.current.x;
-      const py = mouseRef.current.y;
-
-      const vanishX = lerp(near.x0 + W * 0.12, near.x0 + W * 0.04, px);
-      const vanishY = lerp(near.y0 + H * 0.45, near.y0 + H * 0.55, py);
-
-      const far = {
-        x0: vanishX - 20,
-        y0: vanishY - 20,
-        x1: vanishX + 20,
-        y1: vanishY + 20,
-      };
-
-      const rects = [];
-      for (let i = 0; i < frames; i++) {
-        const t = Math.pow(i / (frames - 1), 1.18);
-        rects.push({
-          x0: lerp(near.x0, far.x0, t),
-          y0: lerp(near.y0, far.y0, t),
-          x1: lerp(near.x1, far.x1, t),
-          y1: lerp(near.y1, far.y1, t),
-        });
-      }
-
-      ctx.globalCompositeOperation = "lighter";
-      ctx.strokeStyle = grad;
-      ctx.lineJoin = "round";
-
-      rects.forEach((r, idx) => {
-        ctx.globalAlpha = 1 - idx / frames;
-        ctx.lineWidth = lerp(2.2, 0.4, idx / frames);
-
-        ctx.beginPath();
-        ctx.moveTo(r.x0, r.y0);
-        ctx.lineTo(r.x1, r.y0);
-        ctx.lineTo(r.x1, r.y1);
-        ctx.lineTo(r.x0, r.y1);
-        ctx.closePath();
-        ctx.stroke();
-      });
-
-      rafRef.current = requestAnimationFrame(animate);
-    };
-
-    const handleMove = (e) => {
-      const rect = wrapper.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
-      mouseRef.current = { x, y };
-    };
-
-    window.addEventListener("pointermove", handleMove);
-    resize();
-    animate(0);
-
-    return () => {
-      cancelAnimationFrame(rafRef.current);
-      window.removeEventListener("pointermove", handleMove);
-    };
-  }, [aspect, colorA, colorB, frames]);
-
   return (
-    <div ref={wrapperRef} className="w-full relative" style={{ paddingBottom: `${100 / aspect}%` }}>
-      <canvas ref={canvasRef} className="absolute inset-0" />
-    </div>
+    <svg
+      viewBox="0 0 420 280"
+      width="100%"
+      height="100%"
+      xmlns="http://www.w3.org/2000/svg"
+      className="overflow-visible"
+    >
+      <defs>
+        <linearGradient id="planeGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor={colorA} />
+          <stop offset="100%" stopColor={colorB} />
+        </linearGradient>
+
+        {/* Double Glow */}
+        <filter id="planeGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="first" />
+          <feGaussianBlur stdDeviation="8" in="first" result="second" />
+          <feMerge>
+            <feMergeNode in="second" />
+            <feMergeNode in="first" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <style>{`
+        .main {
+          stroke-dasharray: 12 18;
+          animation: dash 5s linear infinite;
+        }
+        .detail {
+          stroke-dasharray: 8 14;
+          animation: dash 7s linear infinite reverse;
+          opacity: 0.9;
+        }
+        @keyframes dash {
+          to { stroke-dashoffset: -500; }
+        }
+      `}</style>
+
+      <g
+        stroke="url(#planeGrad)"
+        fill="none"
+        strokeWidth="3.2"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+        filter="url(#planeGlow)"
+      >
+        {/* F-22 main silhouette */}
+        <path
+          className="main"
+          d="
+            M210 20
+            L240 55
+            L300 70
+            L350 110
+            L315 145
+            L310 180
+            L260 200
+            L235 240
+            L210 255
+            L185 240
+            L160 200
+            L110 180
+            L105 145
+            L70 110
+            L120 70
+            L180 55
+            Z
+          "
+        />
+
+        {/* Cockpit */}
+        <polygon
+          className="detail"
+          points="190,60 230,60 245,90 210,110 175,90"
+        />
+
+        {/* Spine */}
+        <path className="detail" d="M210 30 L210 110 L210 240" />
+
+        {/* Left wing panels */}
+        <path className="detail" d="M210 110 L150 130 L125 120" />
+        <path className="detail" d="M210 140 L160 155 L135 150" />
+        <path className="detail" d="M210 170 L170 185 L150 180" />
+
+        {/* Right wing panels */}
+        <path className="detail" d="M210 110 L270 130 L295 120" />
+        <path className="detail" d="M210 140 L260 155 L285 150" />
+        <path className="detail" d="M210 170 L250 185 L270 180" />
+
+        {/* Tail thrust */}
+        <polyline className="detail" points="185,220 210,245 235,220" />
+      </g>
+    </svg>
   );
 }

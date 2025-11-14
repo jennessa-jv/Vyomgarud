@@ -33,12 +33,13 @@ export default function Hero() {
         <WireframeTunnel aspect={420/300} />
 
         {/* BIGGER PLANE */}
-        <div
-          className="absolute top-[-40px] right-[-20px] pointer-events-none"
-          style={{ width: 380, height: 260 }}
-        >
-          <PlaneWireframe />
-        </div>
+<div
+  className="absolute top-[-40px] right-[-20px] pointer-events-none z-30"
+  style={{ width: 380, height: 260 }}
+>
+  <PlaneWireframe />
+</div>
+
       </div>
     </section>
   );
