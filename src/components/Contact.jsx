@@ -1,7 +1,10 @@
 export default function Contact() {
   return (
     <footer className="px-6 md:px-12 lg:px-24 py-12" id="contact">
-      <div className="max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
+      {/* Centered main container */}
+      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        {/* Left section */}
         <div>
           <h3 className="text-2xl font-bold">Let’s talk</h3>
           <p className="mt-3 text-gray-300">
@@ -15,6 +18,7 @@ export default function Contact() {
           </div>
         </div>
 
+        {/* Right form */}
         <form className="flex flex-col gap-3">
           <input
             className="bg-[#0b0c0d] border border-gray-800 px-4 py-3 rounded text-sm"
@@ -36,7 +40,8 @@ export default function Contact() {
         </form>
       </div>
 
-      <div className="mt-10 text-gray-600 text-sm">
+      {/* Centered footer text */}
+      <div className="mt-10 text-gray-600 text-sm text-center">
         © {new Date().getFullYear()} VyomGarud — All rights reserved
       </div>
     </footer>
