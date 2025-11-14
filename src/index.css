@@ -1,13 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @apply bg-charcoal text-white font-poppins;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2,.9,.2,1);
 }
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.hero-accent {
+  text-shadow: 0 8px 30px rgba(0,0,0,0.6), 
+               0 0 22px rgba(255,110,170,0.12);
+}
+
+
+.reveal-card { 
+  will-change: transform, opacity; 
+}
+.reveal-card.revealed { 
+  transform: translateY(0); 
+  opacity: 1; 
+}
+/* drone showcase styles */
+.card-neon {
+  position: relative;
+  overflow: hidden;
+  transition: transform .28s ease, box-shadow .28s ease;
+  background: linear-gradient(180deg, rgba(10,12,12,0.6), rgba(4,8,8,0.4));
+  border-radius: 12px;
+}
+.card-neon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255,121,0,0.08);
+  pointer-events: none;
+  border-radius: inherit;
+}
+.card-neon:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 40px rgba(255,100,160,0.06);
+}
+.card-neon .scanline {
+  background: linear-gradient(180deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.03) 50%, rgba(255,255,255,0.0) 100%);
+  mix-blend-mode: overlay;
+  opacity: 0.28;
+  transform: translateY(-40%);
+  transition: transform 1.6s linear;
+  pointer-events: none;
+}
+.card-neon:hover .scanline {
+  transform: translateY(0%);
+}
+
+.card-neon .text-3xl { color: #fff; text-shadow: 0 6px 16px rgba(0,0,0,0.6); }
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.9,.2,1); }
+.revealed { opacity: 1; transform: translateY(0); }
+
+
+@media (max-width: 1024px) {
+  .card-neon { border-radius: 10px; }
+}
+/* reveal helper */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.9,.2,1); }
+.revealed { opacity: 1; transform: translateY(0); }
+
+/* small glow helper for headline */
+.hero-accent { text-shadow: 0 8px 30px rgba(0,0,0,0.6), 0 0 22px rgba(255,110,170,0.12); }
+
+/* feature card reveal stagger (optional) */
+.reveal-card { will-change: transform, opacity; }
+.reveal-card.revealed { transform: translateY(0); opacity: 1; }
+
